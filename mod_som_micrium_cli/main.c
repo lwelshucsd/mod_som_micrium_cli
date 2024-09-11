@@ -25,8 +25,11 @@
 #else // SL_CATALOG_KERNEL_PRESENT
 #include "sl_system_process_action.h"
 #endif // SL_CATALOG_KERNEL_PRESENT
+#include "em_cmu.h"
+#include "em_emu.h"
 #include "em_gpio.h"
 #include "pin_config.h"
+#include "sl_event_handler.h"
 
 int main(void)
 {
@@ -38,6 +41,52 @@ int main(void)
   // LW Enable main comms
   GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
   GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
+
+
+
+  CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFRCO);
+  CMU_ClockEnable(cmuClock_GPIO, true);
+
+  #define MOD_SOM_BOARD
+  #if defined(MOD_SOM_BOARD)||defined(MOD_SOM_MEZZANINE_BOARD)
+  /* Power External Oscillator SOM-U8-U4*/
+  // HF oscillator enable high
+  GPIO_PinModeSet(MOD_SOM_HFXO_OE_PORT, MOD_SOM_HFXO_OE_PIN, gpioModePushPull, 1);
+
+  //initialize external crystal oscillator
+  CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
+  /*ALB change default HFXO mode to External*/
+  hfxoInit.mode=cmuOscMode_External;
+  CMU_HFXOInit(&hfxoInit); // Initialize the HFXO to ensure valid start state
+  /* Starting HFXO and waiting until it is stable */
+  CMU_OscillatorEnable(cmuOsc_HFXO, true, true);
+
+  //50MHz
+  CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFXO); // Set new reference
+  #endif
+
+  /* Starting LFRCO and waiting until it is stable */
+  CMU_OscillatorEnable(cmuOsc_LFRCO, true, true);
+
+  /* Enabling clock to the interface of the low energy modules and sleeptimer */
+  // RTCC needs HFLE to be turned on before init for it to work
+  CMU_ClockEnable(cmuClock_HFLE, true);
+
+  // needed for sleep timer
+  //ADD THIS LINE TO ENABLE 32768 LFXO ON SOM BY ASSERTING THE EM_BUCTRL (and not use the internal RC oscillator) MAG July 2021
+  EMU_BUVoutResSet(EMU_BUCTRL_VOUTRES_WEAK);
+//    CMU_ClockSelectSet(cmuClock_LFE, cmuSelect_LFRCO); MHA removed - see below
+  CMU_ClockSelectSet(cmuClock_LFE, cmuSelect_LFXO); // MHA new line - see below
+
+  CMU_ClockEnable(cmuClock_RTCC, true);
+
+
+
+  //CMU_ClockEnable(cmuClock_HFPER, true);
+  //CMU_ClockEnable(cmuClock_USART5, true);
+
+  sl_iostream_init_instances();
+
 
   // Initialize the application. For example, create periodic timer(s) or
   // task(s) if the kernel is present.
