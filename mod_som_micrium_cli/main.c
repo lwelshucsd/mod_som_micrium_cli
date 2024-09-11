@@ -25,6 +25,8 @@
 #else // SL_CATALOG_KERNEL_PRESENT
 #include "sl_system_process_action.h"
 #endif // SL_CATALOG_KERNEL_PRESENT
+#include "em_gpio.h"
+#include "pin_config.h"
 
 int main(void)
 {
@@ -32,6 +34,10 @@ int main(void)
   // Note that if the kernel is present, processing task(s) will be created by
   // this call.
   sl_system_init();
+
+  // LW Enable main comms
+  GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
+  GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
 
   // Initialize the application. For example, create periodic timer(s) or
   // task(s) if the kernel is present.
