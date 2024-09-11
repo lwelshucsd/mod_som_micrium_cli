@@ -190,6 +190,8 @@
     <property object="PORTIO" propertyId="portio.usb.enable.vbusen" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.wtimer2.enable.cc0" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.wtimer2.enable.cc1" value="Enabled"/>
+    <property object="USART5" propertyId="ABModule.selectedRequirement" value="usart%T%SL_IOSTREAM_USART_USART%T%sl_iostream_usart_usart_config.h"/>
+    <property object="USART5" propertyId="ABPeripheral.included" value="true"/>
   </mode>
   <modeTransition>
     <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.source" value="RESET"/>

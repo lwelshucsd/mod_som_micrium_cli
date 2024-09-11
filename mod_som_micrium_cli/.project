@@ -151,6 +151,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_gpio.h</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.4.3/platform/emlib/inc/em_ldma.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_ldma.h</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.4.3/platform/emlib/inc/em_msc.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_msc.h</locationURI>
@@ -191,6 +196,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_timer.h</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.4.3/platform/emlib/inc/em_usart.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_usart.h</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.4.3/platform/emlib/inc/em_version.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_version.h</locationURI>
@@ -221,6 +231,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_gpio.c</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.4.3/platform/emlib/src/em_ldma.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_ldma.c</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.4.3/platform/emlib/src/em_msc.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_msc.c</locationURI>
@@ -244,6 +259,11 @@
 			<name>gecko_sdk_4.4.3/platform/emlib/src/em_timer.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_timer.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/emlib/src/em_usart.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_usart.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.4.3/platform/CMSIS/Core/Include/cmsis_compiler.h</name>
@@ -329,6 +349,21 @@
 			<name>gecko_sdk_4.4.3/platform/driver/leddrv/src/sl_simple_led.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/driver/leddrv/src/sl_simple_led.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/emdrv/common/inc/ecode.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emdrv/common/inc/ecode.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/emdrv/dmadrv/inc/dmadrv.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emdrv/dmadrv/inc/dmadrv.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/emdrv/dmadrv/src/dmadrv.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emdrv/dmadrv/src/dmadrv.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.4.3/platform/micrium_os/common/include/common.h</name>
@@ -661,6 +696,21 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_stdlib_config.h</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.4.3/platform/service/iostream/inc/sl_iostream_uart.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_uart.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/service/iostream/inc/sl_iostream_usart.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_usart.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/service/iostream/inc/sli_iostream_uart.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sli_iostream_uart.h</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.4.3/platform/service/iostream/src/sl_iostream.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream.c</locationURI>
@@ -674,6 +724,16 @@
 			<name>gecko_sdk_4.4.3/platform/service/iostream/src/sl_iostream_stdlib_config.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_stdlib_config.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/service/iostream/src/sl_iostream_uart.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_uart.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.4.3/platform/service/iostream/src/sl_iostream_usart.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_usart.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.4.3/platform/service/sleeptimer/inc/sl_sleeptimer.h</name>

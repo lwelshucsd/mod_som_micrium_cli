@@ -36,6 +36,8 @@ component:
 - {id: iostream_recommended_stream}
 - {id: iostream_retarget_stdio}
 - {id: iostream_stdlib_config}
+- instance: [usart]
+  id: iostream_usart
 - {id: micriumos_kernel}
 - instance: [led0, led1]
   id: simple_led

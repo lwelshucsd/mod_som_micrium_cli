@@ -6,6 +6,7 @@
 #include "sl_device_init_emu.h"
 #include "sl_sleeptimer.h"
 #include "sl_iostream_stdlib_config.h"
+#include "sl_iostream_init_usart_instances.h"
 #include "sl_simple_led_instances.h"
 #include "sl_cli_instances.h"
 #include "cpu.h"
@@ -50,5 +51,6 @@ void sl_internal_app_init(void)
 
 void sl_iostream_init_instances(void)
 {
+  sl_iostream_usart_init_instances();
 }
 
