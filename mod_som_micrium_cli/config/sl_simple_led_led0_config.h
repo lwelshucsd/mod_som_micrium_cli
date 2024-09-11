@@ -47,9 +47,12 @@
 
 // <gpio> SL_SIMPLE_LED_LED0
 // $[GPIO_SL_SIMPLE_LED_LED0]
-#warning "Simple LED Driver GPIO pin not configured"
-// #define SL_SIMPLE_LED_LED0_PORT            gpioPortA
-// #define SL_SIMPLE_LED_LED0_PIN             1
+#ifndef SL_SIMPLE_LED_LED0_PORT                 
+#define SL_SIMPLE_LED_LED0_PORT                  gpioPortA
+#endif
+#ifndef SL_SIMPLE_LED_LED0_PIN                  
+#define SL_SIMPLE_LED_LED0_PIN                   6
+#endif
 // [GPIO_SL_SIMPLE_LED_LED0]$
 
 // <<< sl:end pin_tool >>>
