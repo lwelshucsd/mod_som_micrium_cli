@@ -24,6 +24,7 @@
 #include "sl_simple_led.h"
 #include "sl_simple_led_instances.h"
 #include "os.h"
+#include "pin_config.h"
 
 /*******************************************************************************
  *******************************   DEFINES   ***********************************
@@ -180,6 +181,10 @@ void led_cmd(sl_cli_command_arg_t *arguments)
  ******************************************************************************/
 void cli_app_init(void)
 {
+  // LW Enable main comms
+  GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
+  GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
+
   bool status;
 
   status = sl_cli_command_add_command_group(sl_cli_inst_handle, command_group);
