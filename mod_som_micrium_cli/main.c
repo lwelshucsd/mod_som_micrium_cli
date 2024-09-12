@@ -31,19 +31,10 @@
 #include "pin_config.h"
 #include "sl_event_handler.h"
 
-int main(void)
+
+// LW Big block copied from SOM code for configuring clocks (most importantly HFXO)
+void mod_som_clock_init()
 {
-  // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
-  // Note that if the kernel is present, processing task(s) will be created by
-  // this call.
-  sl_system_init();
-
-  // LW Enable main comms
-  GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
-  GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
-
-  ///////////////////////////////////////////////////////////////////
-  // LW Begin big block copied from SOM code for configuring clocks (most importantly HFXO)
   CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFRCO);
   CMU_ClockEnable(cmuClock_GPIO, true);
 
@@ -79,13 +70,38 @@ int main(void)
   CMU_ClockSelectSet(cmuClock_LFE, cmuSelect_LFXO); // MHA new line - see below
 
   CMU_ClockEnable(cmuClock_RTCC, true);
-  // LW End big block copied from SOM code for configuring clocks (most importantly HFXO)
-  ///////////////////////////////////////////////////////////////////
+}
 
+
+// LW This is sl_system_init() with our own clock init function placed in the middle
+void mod_system_init()
+{
+  sl_platform_init();
+  mod_som_clock_init();
+  sl_driver_init();
+  sl_service_init();
+  sl_stack_init();
+  sl_internal_app_init();
+}
+
+
+
+int main(void)
+{
+  // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
+  // Note that if the kernel is present, processing task(s) will be created by
+  // this call.
+  sl_system_init();
+
+  // LW Set up clocks
+  mod_som_clock_init();
 
   // LW Re-initialize IOstream so USART baud rate works properly with HFXO
   sl_iostream_init_instances();
 
+  // LW Enable main comms
+  GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
+  GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
 
   // Initialize the application. For example, create periodic timer(s) or
   // task(s) if the kernel is present.
