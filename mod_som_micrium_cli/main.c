@@ -72,6 +72,16 @@ void mod_som_clock_init()
   CMU_ClockEnable(cmuClock_RTCC, true);
 }
 
+void mod_som_main_com_init()
+{
+  // LW Re-initialize IOstream so USART baud rate works properly with HFXO
+  sl_iostream_init_instances();
+
+  // LW Turn on 232 power and set enable pin high
+  GPIO_PinModeSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN, gpioModePushPull, 1);
+  GPIO_PinModeSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN, gpioModePushPull, 1);
+}
+
 
 // LW This is sl_system_init() with our own clock init function placed in the middle
 void mod_system_init()
@@ -96,12 +106,7 @@ int main(void)
   // LW Set up clocks
   mod_som_clock_init();
 
-  // LW Re-initialize IOstream so USART baud rate works properly with HFXO
-  sl_iostream_init_instances();
-
-  // LW Enable main comms
-  GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
-  GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
+  mod_som_main_com_init();
 
   // Initialize the application. For example, create periodic timer(s) or
   // task(s) if the kernel is present.
