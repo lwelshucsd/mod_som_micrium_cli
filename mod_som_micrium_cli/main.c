@@ -42,8 +42,8 @@ int main(void)
   GPIO_PinOutSet(MOD_SOM_URT_EN_PORT, MOD_SOM_URT_EN_PIN);
   GPIO_PinOutSet(MOD_SOM_SER_COMMS_EN_PORT, MOD_SOM_SER_COMMS_EN_PIN);
 
-
-
+  ///////////////////////////////////////////////////////////////////
+  // LW Begin big block copied from SOM code for configuring clocks (most importantly HFXO)
   CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFRCO);
   CMU_ClockEnable(cmuClock_GPIO, true);
 
@@ -79,12 +79,11 @@ int main(void)
   CMU_ClockSelectSet(cmuClock_LFE, cmuSelect_LFXO); // MHA new line - see below
 
   CMU_ClockEnable(cmuClock_RTCC, true);
+  // LW End big block copied from SOM code for configuring clocks (most importantly HFXO)
+  ///////////////////////////////////////////////////////////////////
 
 
-
-  //CMU_ClockEnable(cmuClock_HFPER, true);
-  //CMU_ClockEnable(cmuClock_USART5, true);
-
+  // LW Re-initialize IOstream so USART baud rate works properly with HFXO
   sl_iostream_init_instances();
 
 
